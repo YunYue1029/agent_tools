@@ -4,7 +4,8 @@ A collection of structured skills for AI agents to perform specific tasks in sof
 
 ## Overview
 
-This repository contains the following skills designed to help AI agents assist developers more effectively:
+This directory contains the following skills designed to help AI agents assist developers more effectively.
+For always-on conventions rather than invocable procedures, see [`../rules/`](../rules/).
 
 1. **Explain Skill** - Provides clear explanations of code, flows, and technical concepts
 2. **PR Description Skill** - Generates structured, reviewer-friendly PR descriptions
@@ -16,7 +17,6 @@ This repository contains the following skills designed to help AI agents assist 
 8. **Origin Sync Skill** - Rebase the current branch onto the latest `origin/main`, resolve conflicts hunk by hunk, and force-push it back with `--force-with-lease`
 9. **Codebase Design Skill** - Shared vocabulary and principles for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface
 10. **Improve Codebase Architecture Skill** - Scan the codebase for deepening opportunities, present them as a visual before/after HTML report, then grill through whichever one you pick
-11. **Coding Style Skill** - Write backend entry points as a legible chain: one function whose body is the flow, with each step a named node holding its own detail
 
 ## Usage
 
@@ -59,8 +59,6 @@ skills/
 │       └── hitl-loop.template.sh   # Human-in-the-loop repro harness
 ├── origin-sync/
 │   └── SKILL.md                # Rebase onto origin/main and force-push back
-├── coding-style/
-│   └── SKILL.md                # The chain is the function; nodes hold the detail
 ├── codebase-design/
 │   ├── SKILL.md                # Deep-module vocabulary and design principles
 │   ├── DEEPENING.md            # Deepening a cluster, by dependency category

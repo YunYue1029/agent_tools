@@ -26,7 +26,7 @@ What to cover, roughly in this order. Not every goal needs every item:
 - **Boundary** — what's explicitly out of scope, and whether a "good enough" version exists separate from the full one.
 - **Context** — what triggered this work, and the constraints binding it (time, stack, existing code).
 - **Decomposition** — propose a breakdown and say why that order or grouping. Then refine: what merges, splits, or reorders.
-- **Chain** — for each feature in the breakdown, its flow as an ordered list of named steps, and what each step produces for the ones after it. See [coding-style](../coding-style/SKILL.md); the chain agreed here is the one the entry function's body will read as. Settle it in discussion — a missing step is cheapest to find now, and a chain nobody can name in steps is a feature nobody understands yet.
+- **Chain** — for each feature in the breakdown, its flow as an ordered list of named steps, and what each step produces for the ones after it. See [coding-style](../../rules/coding-style.md); the chain agreed here is the one the entry function's body will read as. Settle it in discussion — a missing step is cheapest to find now, and a chain nobody can name in steps is a feature nobody understands yet.
 - **Granularity** — each step one actionable or verifiable unit. A step that's still vague is a step that needs splitting.
 - **Dependencies** — what blocks what, and how to break any cycle.
 - **Assumptions** — what you're both taking for granted, and which of them need validating before work starts.

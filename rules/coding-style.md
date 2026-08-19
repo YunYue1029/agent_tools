@@ -1,9 +1,18 @@
 ---
-name: coding-style
-description: Split a backend flow into one entry function whose body is the chain of steps, with each step a named function holding its own detail. Use when writing or restructuring an API handler, use-case function, pipeline, or job.
+paths:
+  - "**/api/**"
+  - "**/handlers/**"
+  - "**/routes/**"
+  - "**/views/**"
+  - "**/usecases/**"
+  - "**/services/**"
+  - "**/jobs/**"
+  - "**/tasks/**"
 ---
 
 # Coding Style — the chain is the function
+
+Applies when writing or restructuring a backend entry point: an API handler, use-case function, pipeline, or job. Tune the `paths` globs above to match this project's layout — the rule only loads when Claude opens a file they match.
 
 An API request lands in one function. That function's body is nothing but named steps, in order. All the detail lives inside those steps.
 
@@ -69,4 +78,4 @@ Don't force this onto an endpoint that reads one row and returns it. There's no 
 
 ---
 
-The chain is decided before any code exists — see [planning](../planning/SKILL.md), which agrees it during discussion and records it as named steps. By the time you write the entry function, you're transcribing a chain that's already settled.
+The chain is decided before any code exists — see [planning](../skills/planning/SKILL.md), which agrees it during discussion and records it as named steps. By the time you write the entry function, you're transcribing a chain that's already settled.
