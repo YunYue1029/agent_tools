@@ -6,7 +6,7 @@ should apply without being asked for.
 
 ## Skills
 
-Ten skills in [`skills/`](skills/), each a directory with a `SKILL.md`. A skill's
+Twelve skills in [`skills/`](skills/), each a directory with a `SKILL.md`. A skill's
 body loads only when you invoke it with `/name` or Claude judges it relevant, so
 length costs nothing until it is used.
 
@@ -21,6 +21,8 @@ skills delegate into both.
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Deep-module vocabulary: module, interface, depth, seam, adapter |
 | [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Scan for deepening opportunities, report them visually, then grill |
 | [`code-review`](skills/code-review/SKILL.md) | Two-axis review — Standards and Spec — in parallel sub-agents |
+| [`blast-radius`](skills/blast-radius/SKILL.md) | What a change breaks outside its diff, with the one safety fact proven by running code |
+| [`correct`](skills/correct/SKILL.md) | Turn mistakes agents keep repeating into architecture, types, lints, or tests |
 | [`tdd`](skills/tdd/SKILL.md) | The red-green loop, and what makes a test worth keeping |
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Six-phase loop for hard bugs; build the feedback loop first |
 | [`explain`](skills/explain/SKILL.md) | Explain project code, or a general technical concept |
@@ -28,6 +30,23 @@ skills delegate into both.
 | [`origin-sync`](skills/origin-sync/SKILL.md) | Rebase onto `origin/main` and force-push back safely |
 
 See [`skills/README.md`](skills/README.md) for the full descriptions and file layout.
+
+## Principles
+
+Principles sit between skills and rules. Like rules, you never invoke them — but
+they are triggered by a **situation** ("about to declare done", "about to add a
+layer"), not by a file path, so they ship as skills marked `user-invocable: false`:
+hidden from the `/` menu, loaded when Claude judges the situation matches.
+
+| Principle | Applies when |
+| --- | --- |
+| [`principle-prove-it-works`](skills/principle-prove-it-works/SKILL.md) | Before declaring done — verify the real artifact, not a proxy |
+| [`principle-subtract-before-you-add`](skills/principle-subtract-before-you-add/SKILL.md) | Adding, refactoring, or sizing a diff — remove first, then build small |
+| [`principle-encode-lessons-in-structure`](skills/principle-encode-lessons-in-structure/SKILL.md) | Writing the same instruction twice — make it a check instead |
+| [`principle-model-the-domain`](skills/principle-model-the-domain/SKILL.md) | Writing stateful or branchy logic — encode the domain in a structure |
+| [`principle-guard-the-edges`](skills/principle-guard-the-edges/SKILL.md) | Wiring validation or adapters — guard where data enters, trust types inside |
+
+They install with the skills — the `ln -s` command below picks them up.
 
 ## Rules
 

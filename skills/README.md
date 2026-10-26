@@ -17,6 +17,18 @@ For always-on conventions rather than invocable procedures, see [`../rules/`](..
 8. **Origin Sync Skill** - Rebase the current branch onto the latest `origin/main`, resolve conflicts hunk by hunk, and force-push it back with `--force-with-lease`
 9. **Codebase Design Skill** - Shared vocabulary and principles for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface
 10. **Improve Codebase Architecture Skill** - Scan the codebase for deepening opportunities, present them as a visual before/after HTML report, then grill through whichever one you pick
+11. **Blast Radius Skill** - Find what a change breaks outside its diff, and prove the one fact it is safe because of by running real code
+12. **Correct Skill** - Find the mistakes agents keep repeating in a repo and make each impossible — architecture, then types, then a lint, then a test, docs last — after the user approves each class
+
+### Principles
+
+Situation-triggered guidance, marked `user-invocable: false` so it stays out of the `/` menu and loads only when Claude judges it relevant:
+
+- **Prove It Works** - Verify the real artifact before declaring done, respecting who runs tests and linters
+- **Subtract Before You Add** - Remove dead weight first, then make the smallest change on the simpler base
+- **Encode Lessons in Structure** - A repeated instruction becomes a lint, type, or check
+- **Model the Domain** - Encode the domain in a data structure instead of scattered conditionals
+- **Guard the Edges** - Validate where data enters the system; trust internal types; keep logic pure
 
 ## Usage
 
@@ -63,9 +75,15 @@ skills/
 │   ├── SKILL.md                # Deep-module vocabulary and design principles
 │   ├── DEEPENING.md            # Deepening a cluster, by dependency category
 │   └── DESIGN-IT-TWICE.md      # Parallel sub-agents exploring rival interfaces
-└── improve-codebase-architecture/
-    ├── SKILL.md                # Scan for deepening opportunities, then grill
-    └── HTML-REPORT.md          # Report scaffold, diagram patterns, tone
+├── improve-codebase-architecture/
+│   ├── SKILL.md                # Scan for deepening opportunities, then grill
+│   └── HTML-REPORT.md          # Report scaffold, diagram patterns, tone
+├── blast-radius/
+│   └── SKILL.md                # What a change breaks outside its diff
+├── correct/
+│   └── SKILL.md                # Make repeated agent mistakes impossible
+└── principle-*/
+    └── SKILL.md                # One situation-triggered principle each (5 total)
 ```
 
 ## Language

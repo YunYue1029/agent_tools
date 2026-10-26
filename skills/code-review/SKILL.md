@@ -86,6 +86,8 @@ A change can pass one axis and fail the other:
 
 Reporting them separately stops one axis from masking the other.
 
+Neither axis looks past the diff. For what the change could break elsewhere — callers, wire formats, data the diff never touches — use the [blast-radius](../blast-radius/SKILL.md) skill.
+
 ---
 
 Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (`skills/engineering/code-review`), MIT © Matt Pocock. Repo-specific issue-tracker setup removed.
