@@ -1,6 +1,6 @@
 ---
 name: pr-description
-description: Write a reviewer-friendly PR description in Traditional Chinese from the current branch's changes, saved to z/. Use when the user is opening a PR, asks for a PR description, or wants their branch summarised for review.
+description: Write a reviewer-friendly PR description, in the project's own language, from the current branch's changes, saved to z/. Use when the user is opening a PR, asks for a PR description, or wants their branch summarised for review.
 ---
 
 # PR Description
@@ -25,11 +25,19 @@ Read the changed files where the diff alone doesn't reveal intent, plus any desi
 
 The diff already says what changed, file by file. This description exists for what the diff can't say: what it does, and why. **Never enumerate** — no "added `X` in `Y`", no file-by-file walkthrough. If a sentence could be replaced by looking at the file tree, delete it.
 
-**Write the prose in 繁體中文 (Traditional Chinese).** Everything else stays as-is: the `feat:`/`fix:` prefix, the section headings, and any identifier, path, branch, or command you have to name. Don't translate technical terms that the team writes in English anyway.
+**Write the prose in the project's language** — the skill has no language of its own, so each repo keeps its convention. Take the first of these that gives a clear answer:
+
+1. The user asked for a language.
+2. The repo's recent PR descriptions — `gh pr list --state merged --limit 5 --json body`.
+3. Recent commit messages — `git log -20 --format=%B`.
+4. The README and docs.
+5. Otherwise, the language the user is writing to you in.
+
+Everything else stays as-is: the `feat:`/`fix:` prefix, the section headings, and any identifier, path, branch, or command you have to name. Don't translate technical terms that the team writes in English anyway.
 
 Title line prefixed by the nature of the change: `feat:`, `fix:`, `refactor:`, `docs:` — then one clause naming the effect.
 
-- `## Summary` — why this exists and what it does, as 1–3 bullets. State the effect (「v2 現在能比對到 v1 直接丟掉的 URI-encoded CPE 字串」), not the mechanism (「新增 `CPEQuery` class」).
+- `## Summary` — why this exists and what it does, as 1–3 bullets. State the effect ("v2 now matches the URI-encoded CPE strings v1 silently dropped"), not the mechanism ("add a `CPEQuery` class").
 - `## Behavior / Compatibility` — **only when there's something to say.** Breaking changes, migrations, new env vars or flags, old path still working or not. If nothing changes for a caller, drop the heading — don't write "N/A".
 
 ### Where it goes

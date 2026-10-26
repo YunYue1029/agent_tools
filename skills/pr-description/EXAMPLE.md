@@ -2,7 +2,7 @@
 
 One test decides every line: **could the reviewer get this from the diff or the file tree?** If yes, delete it. What's left is the description's actual job — the effect, and the why.
 
-Both examples describe the same PR. The prose is 繁體中文; prefixes, headings, and identifiers stay English.
+Both examples describe the same PR, for a project whose PRs are written in 繁體中文 — the prose follows the project's language, while prefixes, headings, and identifiers stay English.
 
 ## Bad
 

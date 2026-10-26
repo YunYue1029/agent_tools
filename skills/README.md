@@ -70,4 +70,4 @@ skills/
 
 ## Language
 
-All skills are written in **English** and default to using English for responses, unless the user specifically requests another language.
+All skills are written in **English** and default to using English for responses, unless the user specifically requests another language. Artifacts that belong to a project — such as the PR description from `pr-description` — follow that project's language instead.

@@ -69,3 +69,5 @@ cp rules/coding-style.md /path/to/project/.claude/rules/
 ## Language
 
 The skills and rules are written in English, and answer in English unless asked otherwise.
+Artifacts that belong to a project — such as the PR description `pr-description` writes — follow
+that project's language instead, so one install works across repos with different conventions.
