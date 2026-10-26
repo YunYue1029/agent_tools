@@ -13,6 +13,17 @@ Tests verify behavior through public interfaces, not implementation details. Cod
 
 See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
 
+### The two-edit check
+
+Judge every test — one you're writing, changing, or keeping — against two imagined edits:
+
+- **Break the behavior.** Make the code return a wrong value, skip an effect, or do it twice. If the test still passes, it proves nothing — usually an assertion looser than the contract, or an expected value built by the test itself.
+- **Change the internals.** Keep every observable result the same and restructure underneath. If the test now fails, it's implementation-coupled and will need rewriting on every refactor while catching no bug.
+
+Keep a test that catches the first edit and survives the second; rewrite or delete the rest.
+
+**The contract decides, not the shape of the assertion.** The payload a mocked _external_ service receives is behavior — that service observes it. A call to an internal helper is implementation — no caller can see it. An exact error message pins wording no caller reads; the error type callers branch on is the contract. When "no call" is the promise ("an empty cart never charges"), pair it with a case where the call does happen, so the test shows it can see one.
+
 ## Seams — where tests go
 
 A **seam** is where a module's interface lives — the place you can alter behavior without editing in that place (see the `codebase-design` skill for the full vocabulary). It's also where you test: the interface is the test surface. Tests live at seams, never against internals.
@@ -36,3 +47,4 @@ Ask: "What's the public interface, and which seams should we test?"
 ---
 
 Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (`skills/engineering/tdd`), MIT © Matt Pocock. The `CONTEXT.md` / ADR lookup step was removed.
+The two-edit check is adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) (`principle-test-behavior-not-implementation`), MIT © Lauren Tan.

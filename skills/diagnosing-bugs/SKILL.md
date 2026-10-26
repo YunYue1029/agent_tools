@@ -87,6 +87,8 @@ Each hypothesis must be **falsifiable**: state the prediction it makes.
 
 If you cannot state the prediction, the hypothesis is a vibe — discard or sharpen it.
 
+If the bug appears only after a restart, rank **persisted state** high — config files, caches, lock files, serialized state.
+
 **Show the ranked list to the user before testing.** They often have domain knowledge that re-ranks instantly ("we just deployed a change to #3"), or know hypotheses they've already ruled out. Cheap checkpoint, big time saver. Don't block on it — proceed with your ranking if the user is AFK.
 
 ## Phase 4 — Instrument
@@ -105,6 +107,19 @@ Tool preference:
 
 ## Phase 5 — Fix + regression test
 
+### Fix where it went wrong, not where it surfaced
+
+The symptom is where a wrong state became visible. The root cause is the first place the system did something it shouldn't, or failed to handle a state it should. The fix goes at the root cause.
+
+Ask: **is the state that triggered the symptom legitimate?**
+
+- If the system may be in that state, the code that broke on it is the root cause — handling the state there _is_ the fix.
+- If the state should never exist, a check where it broke hides the bug. Find what produced the state and fix that. Guards, retries, swallowed errors, and clamped values are the usual disguises for a symptom fix.
+
+**Fix the pattern, not the instance.** Search for every other place with the same fault and fix them all. If a workaround needs a paragraph of comment to justify it, the code is wrong — fix the code.
+
+### Lock it in
+
 Write the regression test **before the fix** — but only if there is a **correct seam** for it.
 
 A correct seam is one where the test exercises the **real bug pattern** as it occurs at the call site. If the only available seam is too shallow (single-caller test when the bug needs multiple callers, unit test that can't replicate the chain that triggered the bug), a regression test there gives false confidence. See the [tdd](../tdd/SKILL.md) skill for what a seam is and what makes a test at one worth keeping.
@@ -119,6 +134,16 @@ If a correct seam exists:
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
 
+### When fixes keep failing — attack the premise
+
+If **two fixes that share one premise** have both failed the loop, stop — a third fix on the same premise spends effort where the evidence already says the cause is not.
+
+1. **Write the premise down** — the one sentence every failed fix assumed.
+2. **Test it directly.** Find an observation that would come out differently if the premise were false, and make it. Look at how the failures are distributed, not only how large they are.
+3. **Follow the evidence.** If it contradicts the premise, the cause is elsewhere — return to Phase 3 with what the failures have in common that the premise didn't predict. If it confirms the premise, ask the next "why": the earlier fixes may have treated a consequence.
+
+Do not start the next fix before the premise is written down and tested.
+
 ## Phase 6 — Cleanup + post-mortem
 
 Required before declaring done:
@@ -131,6 +156,9 @@ Required before declaring done:
 
 **Then ask: what would have prevented this bug?** If the answer involves architectural change — no good test seam, tangled callers, hidden coupling — state it explicitly with the specifics, as part of the outcome rather than a vague aside. Make that recommendation **after** the fix is in, not before: you have more information now than when you started.
 
+**And ask: what would have shown it sooner?** If the deciding fact took a deep dig to find, propose the cheap, always-on signal — a log line, an assertion, a metric — that would have shown it at first look.
+
 ---
 
 Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (`skills/engineering/diagnosing-bugs`), MIT © Matt Pocock. The `CONTEXT.md` / ADR lookup and the hand-off to that repo's architecture skill were removed.
+The root-cause, premise, and always-on-signal guidance is adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) (`principle-fix-root-causes`, `principle-attack-the-premise`), MIT © Lauren Tan.

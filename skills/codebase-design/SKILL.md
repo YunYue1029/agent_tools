@@ -64,6 +64,23 @@ When designing an interface, ask:
 - **The interface is the test surface.** Callers and tests cross the same seam. If you want to test *past* the interface, the module is probably the wrong shape.
 - **One adapter means a hypothetical seam. Two adapters means a real one.** Don't introduce a seam unless something actually varies across it.
 
+## Reader load
+
+Depth is the caller's view of a module. **Reader load** is the maintainer's: the work a reader must do to understand the code. It has two independent axes:
+
+- **Layers to trace** — indirections between a question and its answer.
+- **State to hold** — hidden or mutable context the reader must keep in their head.
+
+A flat file with 50 globals can be as hard to follow as a six-layer adapter stack, so guard both:
+
+- **Collapse layers that cost more than they save.** A one-caller wrapper, a pass-through module that repeats its neighbour's methods and arguments, a seam with one adapter — the deletion test finds these. Adjacent layers should change the abstraction, not restate it.
+- **Shrink state scope.** Returns over mutations, locals over fields, fields over module state, module state over globals. Derive a value instead of keeping two copies in sync.
+- **State an invariant once, at the interface**, not in every caller — so the reader learns it once.
+
+Before adding a layer or a piece of state, ask whether it removes at least as much reader load somewhere else.
+
+**The 30-second test:** can a new reader answer "where does X come from?" and "what can change X?" in under 30 seconds? If not, cut layers or cut state.
+
 ## Designing for testability
 
 Good interfaces make testing natural:
@@ -108,3 +125,4 @@ Good interfaces make testing natural:
 ---
 
 Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (`skills/engineering/codebase-design`), MIT © Matt Pocock. The `CONTEXT.md` vocabulary lookup was removed.
+Reader load is adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) (`principle-minimize-reader-load`), MIT © Lauren Tan.
