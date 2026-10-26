@@ -24,6 +24,7 @@ skills delegate into both.
 | [`blast-radius`](skills/blast-radius/SKILL.md) | What a change breaks outside its diff, with the one safety fact proven by running code |
 | [`correct`](skills/correct/SKILL.md) | Turn mistakes agents keep repeating into architecture, types, lints, or tests |
 | [`tdd`](skills/tdd/SKILL.md) | The red-green loop, and what makes a test worth keeping |
+| [`testing`](skills/testing/SKILL.md) | Unit, testing-tool endpoint, and testing-tool flow tests for a feature, run until green |
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Six-phase loop for hard bugs; build the feedback loop first |
 | [`explain`](skills/explain/SKILL.md) | Explain project code, or a general technical concept |
 | [`pr-description`](skills/pr-description/SKILL.md) | Reviewer-friendly PR description from the branch diff |
