@@ -6,9 +6,9 @@ should apply without being asked for.
 
 ## Skills
 
-Twelve skills in [`skills/`](skills/), each a directory with a `SKILL.md`. A skill's
-body loads only when you invoke it with `/name` or Claude judges it relevant, so
-length costs nothing until it is used.
+Each skill in [`skills/`](skills/) is a directory with a `SKILL.md`, plus any
+supporting files it links to. A skill's body loads only when you invoke it with
+`/name` or Claude judges it relevant.
 
 They are meant to be used together — `grilling` is the shared discussion
 discipline and `codebase-design` the shared vocabulary, and the larger
@@ -28,8 +28,6 @@ skills delegate into both.
 | [`explain`](skills/explain/SKILL.md) | Explain project code, or a general technical concept |
 | [`pr-description`](skills/pr-description/SKILL.md) | Reviewer-friendly PR description from the branch diff |
 | [`origin-sync`](skills/origin-sync/SKILL.md) | Rebase onto `origin/main` and force-push back safely |
-
-See [`skills/README.md`](skills/README.md) for the full descriptions and file layout.
 
 ## Principles
 

@@ -9,9 +9,7 @@ A discipline for hard bugs. Skip phases only when explicitly justified.
 
 ## Phase 1 — Build a feedback loop
 
-**This is the skill.** Everything else is mechanical. If you have a **tight** pass/fail signal for the bug — one that goes red on _this_ bug — you will find the cause; bisection, hypothesis-testing, and instrumentation all just consume it. If you don't have one, no amount of staring at code will save you.
-
-Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give up.**
+**This is the skill.** With a tight pass/fail signal that goes red on _this_ bug, you will find the cause — bisection, hypotheses, and instrumentation all just consume it. Without one, staring at code won't save you. Spend disproportionate effort here.
 
 ### Ways to construct one — try them in roughly this order
 
@@ -26,17 +24,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 9. **Differential loop.** Run the same input through old-version vs new-version (or two configs) and diff outputs.
 10. **HITL bash script.** Last resort. If a human must click, drive _them_ with [`scripts/hitl-loop.template.sh`](scripts/hitl-loop.template.sh) so the loop is still structured. Captured output feeds back to you.
 
-Build the right feedback loop, and the bug is 90% fixed.
-
-### Tighten the loop
-
-Treat the loop as a product. Once you have _a_ loop, **tighten** it:
-
-- Can I make it faster? (Cache setup, skip unrelated init, narrow the test scope.)
-- Can I make the signal sharper? (Assert on the specific symptom, not "didn't crash".)
-- Can I make it more deterministic? (Pin time, seed RNG, isolate filesystem, freeze network.)
-
-A 30-second flaky loop is barely better than no loop; a 2-second deterministic one is tight — a debugging superpower.
+Once you have _a_ loop, tighten it until it meets the completion criterion below: cache setup and narrow scope to make it fast, assert on the specific symptom rather than "didn't crash", and pin time, seed RNG, and freeze network to make it deterministic.
 
 ### Non-deterministic bugs
 
@@ -44,7 +32,7 @@ The goal is not a clean repro but a **higher reproduction rate**. Loop the trigg
 
 ### When you genuinely cannot build a loop
 
-Stop and say so explicitly. List what you tried. Ask the user for: (a) access to whatever environment reproduces it, (b) a captured artifact (HAR file, log dump, core dump, screen recording with timestamps), or (c) permission to add temporary production instrumentation. Do **not** proceed to hypothesise without a loop.
+Stop and say so explicitly. List what you tried. Ask the user for: (a) access to whatever environment reproduces it, (b) a captured artifact (HAR file, log dump, core dump, screen recording with timestamps), or (c) permission to add temporary production instrumentation.
 
 ### Completion criterion — a tight loop that goes red
 
@@ -53,9 +41,9 @@ Phase 1 is done when the loop is **tight** and **red-capable**: you can name **o
 - [ ] **Red-capable** — it drives the actual bug code path and asserts the **user's exact symptom**, so it can go red on this bug and green once fixed. Not "runs without erroring" — it must be able to _catch this specific bug_.
 - [ ] **Deterministic** — same verdict every run (flaky bugs: a pinned, high reproduction rate, per above).
 - [ ] **Fast** — seconds, not minutes.
-- [ ] **Agent-runnable** — you can run it unattended; a human in the loop only via [`scripts/hitl-loop.template.sh`](scripts/hitl-loop.template.sh).
+- [ ] **Agent-runnable** — you can run it unattended; a human in the loop only via the HITL script.
 
-If you catch yourself reading code to build a theory before this command exists, **stop — jumping straight to a hypothesis is the exact failure this skill prevents.** No red-capable command, no Phase 2.
+**No red-capable command, no Phase 2.** Reading code to build a theory before this command exists is the exact failure this skill prevents.
 
 ## Phase 2 — Reproduce + minimise
 
@@ -71,11 +59,7 @@ Confirm:
 
 Once it's red, shrink the repro to the **smallest scenario that still goes red**. Cut inputs, callers, config, data, and steps **one at a time**, re-running the loop after each cut — keep only what's load-bearing for the failure.
 
-Why bother: a minimal repro shrinks the hypothesis space in Phase 3 (fewer moving parts left to suspect) and becomes the clean regression test in Phase 5.
-
-Done when **every remaining element is load-bearing** — removing any one of them makes the loop go green.
-
-Do not proceed until you have reproduced **and** minimised.
+Done when **every remaining element is load-bearing** — removing any one of them makes the loop go green. The minimal repro shrinks the hypothesis space in Phase 3 and becomes the regression test in Phase 5.
 
 ## Phase 3 — Hypothesise
 
@@ -89,7 +73,7 @@ If you cannot state the prediction, the hypothesis is a vibe — discard or shar
 
 If the bug appears only after a restart, rank **persisted state** high — config files, caches, lock files, serialized state.
 
-**Show the ranked list to the user before testing.** They often have domain knowledge that re-ranks instantly ("we just deployed a change to #3"), or know hypotheses they've already ruled out. Cheap checkpoint, big time saver. Don't block on it — proceed with your ranking if the user is AFK.
+**Show the ranked list to the user before testing.** Their domain knowledge often re-ranks it instantly ("we just deployed a change to #3"). Don't block on it — proceed with your ranking if the user is AFK.
 
 ## Phase 4 — Instrument
 
@@ -101,7 +85,7 @@ Tool preference:
 2. **Targeted logs** at the boundaries that distinguish hypotheses.
 3. Never "log everything and grep".
 
-**Tag every debug log** with a unique prefix, e.g. `[DEBUG-a4f2]`. Cleanup at the end becomes a single grep. Untagged logs survive; tagged logs die.
+**Tag every debug log** with a unique prefix, e.g. `[DEBUG-a4f2]`, so cleanup at the end is a single grep.
 
 **Perf branch.** For performance regressions, logs are usually wrong. Instead: establish a baseline measurement (timing harness, `performance.now()`, profiler, query plan), then bisect. Measure first, fix second.
 

@@ -34,22 +34,9 @@ Apply the **deletion test** to anything you suspect is shallow: would deleting i
 
 Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `open <path>` on macOS, `xdg-open <path>` on Linux, `start <path>` on Windows — and tell them the absolute path.
 
-The report uses **Tailwind via CDN** for layout and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapses). Each candidate gets a **before/after visualisation**. Be visual.
-
-For each candidate, render a card with:
-
-- **Files** — which files/modules are involved
-- **Problem** — why the current architecture is causing friction
-- **Solution** — plain English description of what would change
-- **Benefits** — explained in terms of locality and leverage, and how tests would improve
-- **Before / After diagram** — side by side, custom-drawn, illustrating the shallowness and the deepening
-- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
-
-End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
+Each candidate gets a card centred on a **before/after diagram** and a recommendation-strength badge; the report ends with a **Top recommendation** — which candidate you'd tackle first and why. [HTML-REPORT.md](HTML-REPORT.md) has the scaffold, the card fields, the diagram patterns, and the tone.
 
 Use the repo's own domain vocabulary for the nouns and the `codebase-design` glossary for the architecture. If the codebase calls it an "Order", talk about "the Order intake module" — not "the FooBarHandler", and not "the Order service".
-
-See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
 
 Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
 

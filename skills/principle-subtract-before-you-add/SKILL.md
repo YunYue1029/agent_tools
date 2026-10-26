@@ -6,9 +6,7 @@ user-invocable: false
 
 # Subtract Before You Add
 
-When evolving a system, remove complexity first, then build. Default to subtraction.
-
-Leave the design slightly simpler — and no less capable — than you found it, behind the same or a smaller surface.
+Default to subtraction. Leave the design slightly simpler — and no less capable — than you found it, behind the same or a smaller surface.
 
 ## Sequence
 

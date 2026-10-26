@@ -49,6 +49,6 @@ The file holds the PR description and nothing else — no preamble, no explanati
 ## Rules
 
 - **Never describe a change that isn't in the diff.** No invented rationale, no compatibility claim you didn't check. If you can't tell why something changed, say so or leave it out.
-- **State effect, not mechanism.** If you're naming a function, file, or class, ask whether the sentence survives without it. Usually it does — cut the name.
+- **If you're naming a function, file, or class,** ask whether the sentence survives without it. Usually it does — cut the name.
 - Bold what a reviewer scans for: **breaking**, **compatibility**.
 - Write like an engineer filing a PR. Not chatty, not a paper.

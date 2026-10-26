@@ -5,7 +5,7 @@ description: Test-driven development. Use when the user wants to build features 
 
 # Test-Driven Development
 
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle — consult them before and during the loop, not after.
+TDD is the red → green loop. This skill is what makes that loop produce tests worth keeping.
 
 ## What a good test is
 
@@ -26,7 +26,7 @@ Keep a test that catches the first edit and survives the second; rewrite or dele
 
 ## Seams — where tests go
 
-A **seam** is where a module's interface lives — the place you can alter behavior without editing in that place (see the `codebase-design` skill for the full vocabulary). It's also where you test: the interface is the test surface. Tests live at seams, never against internals.
+Tests live at **seams** — where a module's interface lives (see the `codebase-design` skill) — never against internals. The interface is the test surface.
 
 **Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything — agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 

@@ -11,13 +11,7 @@ Skip this skill when the goal is already one clear step, when the user has hande
 
 ## Phase 1 — Grill
 
-Run the discussion as a [grilling](../grilling/SKILL.md), not a questionnaire:
-
-- **One question at a time.** Ask, wait for the answer, then ask the next. Dumping the whole list into one message is bewildering and gets shallow answers — it turns the discussion into a form to fill in, which is exactly what this phase is not.
-- **Carry your own recommended answer into every question.** The user corrects a draft; they don't compose one from nothing.
-- **Look facts up; only ask for decisions.** Current behaviour, whether a dependency exists, how a module is shaped — go and find it. The decisions are the user's; put each one to them and wait.
-- **Walk the decision tree.** Resolve dependencies one at a time — whatever unblocks three other decisions goes first. Don't debate step ordering before the goal itself is settled.
-- **Don't act until they confirm.** No implementation, no file writes, not even the plan document, until Phase 2 passes.
+Run the discussion as a [grilling](../grilling/SKILL.md) — one question at a time, each with your recommended answer. Settle the goal before debating step order. No implementation and no file writes, not even the plan document, until Phase 2 passes.
 
 What to cover, roughly in this order. Not every goal needs every item:
 
@@ -87,9 +81,7 @@ Use this structure:
 
 Out of Scope and Risks are optional — drop the heading rather than write "N/A".
 
-**No code blocks in the plan.** No implementation, no diffs, no config, no pseudocode, and no fenced diagrams. They bloat the document, go stale the moment anyone writes the real thing, and nobody reads them anyway. Name the file, function, or symbol instead — `parseConfig` in [config.ts](config.ts) — and describe the change in prose. A step that can only be explained by showing code is a step that hasn't been decided yet; take it back to Phase 1.
-
-**This applies to the chain too.** Write it as a numbered list of named steps and what each one produces — never as code, and never as an ASCII diagram in a fence. The chain is a decision about the flow, not a draft of the file. If naming the steps in a list isn't enough to convey it, the flow isn't settled yet.
+**No code blocks in the plan** — no implementation, diffs, config, pseudocode, or fenced diagrams, and that includes the chain. They go stale the moment anyone writes the real thing. Name the file, function, or symbol instead — `parseConfig` in [config.ts](config.ts) — and describe the change in prose. A step or chain that can only be explained by showing code hasn't been decided yet; take it back to Phase 1.
 
 **The document records what was agreed**, not a better plan you thought of while writing it up. If you've changed your mind, that's Phase 1 again.
 

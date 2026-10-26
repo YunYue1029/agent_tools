@@ -8,7 +8,9 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 - **Standards** — does the code conform to this repo's documented coding standards?
 - **Spec** — does the code faithfully implement the originating issue / PRD / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+A change can pass one axis and fail the other — every standard followed but the wrong thing built, or exactly what was asked but against the conventions. So both axes run as **parallel sub-agents** with separate context, and their findings are reported separately so one can't mask the other.
+
+Neither axis looks past the diff. For what the change could break elsewhere — callers, wire formats, data the diff never touches — use the [blast-radius](../blast-radius/SKILL.md) skill.
 
 ## Process
 
@@ -60,8 +62,8 @@ Send a single message with two `Agent` tool calls. Use the `general-purpose` sub
 **Standards sub-agent prompt** — include:
 
 - The full diff command and commit list.
-- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full — the sub-agent has no other access to it.
-- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- The list of standards-source files you found in step 3, **plus the smell baseline and its two rules** pasted in full — the sub-agent has no other access to them.
+- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Mark documented-standard breaches as hard violations and smells as judgement calls. Under 400 words."
 
 **Spec sub-agent prompt** — include:
 
@@ -73,20 +75,9 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings across axes.
 
-End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes — that's the reranking the separation exists to prevent.
-
-## Why two axes
-
-A change can pass one axis and fail the other:
-
-- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
-- Code that does exactly what the issue asked but breaks the project's conventions → **Spec pass, Standards fail.**
-
-Reporting them separately stops one axis from masking the other.
-
-Neither axis looks past the diff. For what the change could break elsewhere — callers, wire formats, data the diff never touches — use the [blast-radius](../blast-radius/SKILL.md) skill.
+End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any).
 
 ---
 
