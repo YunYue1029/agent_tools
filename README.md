@@ -19,6 +19,7 @@ skills delegate into both.
 | [`grilling`](skills/grilling/SKILL.md) | Relentless one-question-at-a-time interview to stress-test an idea |
 | [`planning`](skills/planning/SKILL.md) | Grill a vague goal into ordered steps, then write the plan to `z/` |
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Deep-module vocabulary: module, interface, depth, seam, adapter |
+| [`architecture`](skills/architecture/SKILL.md) | Map the code's main flows as chains of steps, then expand each step into its own file |
 | [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Scan for deepening opportunities, report them visually, then grill |
 | [`code-review`](skills/code-review/SKILL.md) | Two-axis review — Standards and Spec — in parallel sub-agents |
 | [`blast-radius`](skills/blast-radius/SKILL.md) | What a change breaks outside its diff, with the one safety fact proven by running code |
