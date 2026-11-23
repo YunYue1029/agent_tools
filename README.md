@@ -58,6 +58,7 @@ context only when Claude opens a matching file.
 | Rule | Applies to |
 | --- | --- |
 | [`coding-style`](rules/coding-style.md) | Backend entry points — the chain is the function, nodes hold the detail |
+| [`ui-copy`](rules/ui-copy.md) | Frontend components — no description line under a label |
 
 Tune each rule's `paths` globs to the layout of the project you drop it into; a glob
 that matches nothing means the rule never loads.
