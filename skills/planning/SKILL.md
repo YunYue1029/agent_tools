@@ -30,19 +30,19 @@ What to cover, roughly in this order. Not every goal needs every item:
 
 ## Phase 2 — Convergence check
 
-Write nothing until every applicable box is ticked. If one isn't, go back to Phase 1.
+Write nothing until every applicable item below holds. If one doesn't, go back to Phase 1.
 
-- [ ] Goal and success criteria agreed by both sides
-- [ ] Every step is a single actionable or verifiable unit
-- [ ] Each feature's chain named as an ordered list of steps, with what each produces
-- [ ] Order defined, no unresolved dependency conflicts
-- [ ] Important assumptions named out loud
-- [ ] Key trade-offs and decisions clear enough to write down
-- [ ] In-scope and out-of-scope agreed
+- Goal and success criteria agreed by both sides
+- Every step is a single actionable or verifiable unit
+- Each feature's chain named as an ordered list of steps, with what each produces
+- Order defined, no unresolved dependency conflicts
+- Important assumptions named out loud
+- Key trade-offs and decisions clear enough to write down
+- In-scope and out-of-scope agreed
 
 ## Phase 3 — Write the plan
 
-Write the plan to `z/plan-<goal-slug>.md` at the repository root — `git rev-parse --show-toplevel` for the root, and a few kebab-case words from the goal for the slug. Create `z/` if it doesn't exist. If that file already exists, overwrite it only after reading it; if it holds an unrelated plan, pick the next free `z/plan-<goal-slug>-2.md`.
+Write the plan to `z/plan-<goal-slug>.md` at the repository root — `git rev-parse --show-toplevel` for the root, and a few kebab-case words from the goal for the slug. The filename always starts with `plan-`; the slug never replaces or drops that prefix. Create `z/` if it doesn't exist. If that file already exists, overwrite it only after reading it; if it holds an unrelated plan, pick the next free `z/plan-<goal-slug>-2.md`.
 
 Use this structure:
 
