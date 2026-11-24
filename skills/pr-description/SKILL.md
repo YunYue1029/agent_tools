@@ -1,6 +1,6 @@
 ---
 name: pr-description
-description: Write a reviewer-friendly PR description, in the project's own language, from the current branch's changes, saved to z/. Use when the user is opening a PR, asks for a PR description, or wants their branch summarised for review.
+description: Write a reviewer-friendly PR description, in the project's own language, from the current branch's changes, set directly on the branch's GitHub PR. Use when the user is opening a PR, asks for a PR description, or wants their branch summarised for review.
 ---
 
 # PR Description
@@ -40,11 +40,16 @@ Title line prefixed by the nature of the change: `feat:`, `fix:`, `refactor:`, `
 - `## Summary` — why this exists and what it does, as 1–3 bullets. State the effect ("v2 now matches the URI-encoded CPE strings v1 silently dropped"), not the mechanism ("add a `CPEQuery` class").
 - `## Behavior / Compatibility` — **only when there's something to say.** Breaking changes, migrations, new env vars or flags, old path still working or not. If nothing changes for a caller, drop the heading — don't write "N/A".
 
+Those two are the only sections. No `## Test plan`, no checkboxes (`- [ ]` / `- [x]`), and no line about whether ruff, tests, or CI have run or passed. CI reports its own failures, and an unticked box tells the next reader something is unverified when it isn't.
+
 ### Where it goes
 
-Write the description to `z/pr-<branch>.md` at the repository root — `git rev-parse --show-toplevel` for the root, `git rev-parse --abbrev-ref HEAD` for the branch, with `/` in the branch name replaced by `-`. Create `z/` if it doesn't exist. If that file already exists, overwrite it only after reading it; if it holds something unrelated, pick the next free `z/pr-<branch>-2.md`.
+Put it straight on GitHub — no local file.
 
-The file holds the PR description and nothing else — no preamble, no explanation of how you produced it. In chat, reply with just the path you wrote.
+- **The branch has an open PR** (`gh pr view --json url,title,body`): read its current body first, then set the title and body with `gh pr edit --title "<title>" --body-file -`, the body on stdin.
+- **No PR yet:** push the branch if it isn't on the remote, then `gh pr create --base <target> --title "<title>" --body-file -`.
+
+The body holds the PR description and nothing else — no preamble, no explanation of how you produced it. In chat, reply with just the PR URL.
 
 ## Rules
 
