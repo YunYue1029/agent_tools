@@ -28,6 +28,7 @@ skills delegate into both.
 | [`testing`](skills/testing/SKILL.md) | Unit, testing-tool endpoint, and testing-tool flow tests for a feature, run until green |
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Six-phase loop for hard bugs; build the feedback loop first |
 | [`explain`](skills/explain/SKILL.md) | Explain project code, or a general technical concept |
+| [`interrogate`](skills/interrogate/SKILL.md) | Quiz you on your own diff — where a secret really lives, what the defaults are — so you understand what you changed |
 | [`pr-description`](skills/pr-description/SKILL.md) | Reviewer-friendly PR description from the branch diff |
 | [`origin-sync`](skills/origin-sync/SKILL.md) | Rebase onto `origin/main` and force-push back safely |
 
