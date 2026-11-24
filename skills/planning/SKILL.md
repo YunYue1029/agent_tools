@@ -1,6 +1,6 @@
 ---
 name: planning
-description: Decompose a high-level or vague goal into ordered, verifiable steps — grill the user first, write the agreed plan to Markdown in z/ only after it converges. Use when the user asks to "plan this", "discuss how to do this first", or hands over a goal that needs breaking down before anyone builds anything.
+description: Decompose a high-level or vague goal into ordered, verifiable steps — grill the user first, write the agreed plan to Markdown in z/ only after it converges. Use when the user asks to "plan this", "discuss how to do this first", says "先規劃", "規劃一下", "討論怎麼做", "拆步驟", or hands over a goal that needs breaking down before anyone builds anything.
 ---
 
 # Planning
@@ -20,7 +20,7 @@ What to cover, roughly in this order. Not every goal needs every item:
 - **Boundary** — what's explicitly out of scope, and whether a "good enough" version exists separate from the full one.
 - **Context** — what triggered this work, and the constraints binding it (time, stack, existing code).
 - **Decomposition** — propose a breakdown and say why that order or grouping. Then refine: what merges, splits, or reorders.
-- **Chain** — for each feature in the breakdown, its flow as an ordered list of named steps, and what each step produces for the ones after it. See [coding-style](../../rules/coding-style.md); the chain agreed here is the one the entry function's body will read as. Settle it in discussion — a missing step is cheapest to find now, and a chain nobody can name in steps is a feature nobody understands yet.
+- **Chain** — for each feature in the breakdown, its flow as an ordered list of named steps, and what each step produces for the ones after it. See the coding-style rule (`rules/coding-style.md` in agent_tools); the chain agreed here is the one the entry function's body will read as. Settle it in discussion — a missing step is cheapest to find now, and a chain nobody can name in steps is a feature nobody understands yet.
 - **Granularity** — each step one actionable or verifiable unit. A step that's still vague is a step that needs splitting.
 - **Dependencies** — what blocks what, and how to break any cycle.
 - **Assumptions** — what you're both taking for granted, and which of them need validating before work starts.
@@ -42,7 +42,7 @@ Write nothing until every applicable item below holds. If one doesn't, go back t
 
 ## Phase 3 — Write the plan
 
-Write the plan to `z/plan-<goal-slug>.md` at the repository root — `git rev-parse --show-toplevel` for the root, and a few kebab-case words from the goal for the slug. The filename always starts with `plan-`; the slug never replaces or drops that prefix. Create `z/` if it doesn't exist. If that file already exists, overwrite it only after reading it; if it holds an unrelated plan, pick the next free `z/plan-<goal-slug>-2.md`.
+Write the plan to `z/plan-<goal-slug>.md` at the repository root — `git rev-parse --show-toplevel` for the root, and a few kebab-case words from the goal for the slug. The filename always starts with `plan-`; the slug never replaces or drops that prefix. If the goal belongs to the patches topic, use `z/patches/` instead of `z/`. Create the directory if it doesn't exist, but skip the check when this conversation already showed it exists. If that file already exists, overwrite it only after reading it; if it holds an unrelated plan, pick the next free `z/plan-<goal-slug>-2.md`.
 
 Use this structure:
 
